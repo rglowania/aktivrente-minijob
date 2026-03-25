@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aktivrente vs. Minijob</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=IBM+Plex+Mono:wght@300;400;500&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+
+/* ═══════════════════════════════════════════════════════════════
+   G-DESIGN — Template v1.1
+   ═══════════════════════════════════════════════════════════════ */
+:root,[data-theme="dark"]{
+  --bg:#0c1410;--surface:#13201a;--surface2:#192b22;--border:#213328;
+  --accent:#5d9e7a;--accent-lt:#89c4a2;--accent-dim:rgba(93,158,122,0.13);
+  --text:#ddeee5;--text-muted:#6e9480;
+}
+[data-theme="light"]{
+  --bg:#f0f7f3;--surface:#ffffff;--surface2:#e6f2eb;--border:#bdd8c8;
+  --accent:#2e7a50;--accent-lt:#1e5c3a;--accent-dim:rgba(46,122,80,0.10);
+  --text:#0f1f16;--text-muted:#4d7a5e;
+}
+@media(prefers-color-scheme:light){
+  :root:not([data-theme]){
+    --bg:#f0f7f3;--surface:#ffffff;--surface2:#e6f2eb;--border:#bdd8c8;
+    --accent:#2e7a50;--accent-lt:#1e5c3a;--accent-dim:rgba(46,122,80,0.10);
+    --text:#0f1f16;--text-muted:#4d7a5e;
+  }
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{
+  background:var(--bg);color:var(--text);
+  font-family:'IBM Plex Sans',sans-serif;font-weight:300;
+  min-height:100vh;padding:40px 20px 80px;
+  transition:background .25s,color .25s;
+}
+body::before{
+  content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+  background-image:
+    linear-gradient(rgba(93,158,122,0.04) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(93,158,122,0.04) 1px,transparent 1px);
+  background-size:40px 40px;
+}
+.container{max-width:960px;margin:0 auto;position:relative;z-index:1;}
+.theme-toggle{
+  position:fixed;top:18px;right:20px;display:flex;gap:3px;
+  z-index:1000;background:var(--surface);border:1px solid var(--border);padding:4px;
+}
+.theme-btn{
+  width:28px;height:28px;background:transparent;border:none;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  color:var(--text-muted);transition:all .2s;padding:0;
+}
+.theme-btn:hover{color:var(--accent);}
+.theme-btn.active{color:var(--accent);background:var(--accent-dim);}
+.theme-btn svg{width:13px;height:13px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+h1{font-family:'Playfair Display',serif;font-size:clamp(26px,5vw,44px);font-weight:600;line-height:1.15;color:var(--text);margin-bottom:10px;}
+h1 span{color:var(--accent);}
+h2{font-family:'Playfair Display',serif;font-size:clamp(18px,3vw,26px);font-weight:600;color:var(--text);margin-bottom:8px;}
+.subtitle{font-size:12px;color:var(--text-muted);font-family:'IBM Plex Mono',monospace;letter-spacing:0.5px;}
+.badge{display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--accent);border:1px solid var(--accent-dim);padding:4px 14px;margin-bottom:18px;}
+.card-title{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--accent);margin-bottom:18px;}
+.hint{font-size:10px;color:var(--text-muted);margin-top:5px;font-family:'IBM Plex Mono',monospace;line-height:1.5;}
+.hint b{color:var(--accent-lt);}
+.disclaimer{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--text-muted);line-height:1.7;opacity:.7;margin-top:32px;}
+footer{text-align:center;padding:32px 0 0;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:1px;color:var(--text-muted);opacity:.6;}
+/* ═══════════════════════════════════════════════════════════════
+   ENDE G-DESIGN
+   ═══════════════════════════════════════════════════════════════ */
+
+/* App-spezifisch */
+.card{background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--accent);padding:28px 32px;margin-bottom:20px;}
+label{display:block;margin-bottom:16px;}
+.lbl{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--text-muted);display:block;margin-bottom:6px;}
+input,select{width:100%;background:var(--surface2);border:1px solid var(--border);color:var(--text);font-family:'IBM Plex Mono',monospace;font-size:14px;padding:10px 14px;outline:none;-webkit-appearance:none;}
+input:focus,select:focus{border-color:var(--accent);}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+.btn{width:100%;padding:14px;background:var(--accent);color:#fff;border:none;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:3px;text-transform:uppercase;cursor:pointer;margin-top:8px;transition:opacity .2s;}
+.btn:hover{opacity:.85;}
+
+/* Ergebnis */
+#result{display:none;}
+.res-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:20px;}
+.res-box{background:var(--surface2);border:1px solid var(--border);padding:18px 20px;}
+.res-box.highlight{border-color:var(--accent);background:var(--accent-dim);}
+.res-label{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--text-muted);margin-bottom:8px;}
+.res-val{font-family:'Playfair Display',serif;font-size:28px;color:var(--text);}
+.res-val.accent{color:var(--accent);}
+.res-sub{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--text-muted);margin-top:4px;}
+
+/* Empfehlung */
+.empfehlung{margin-top:20px;padding:20px 24px;border-left:3px solid var(--accent);background:var(--accent-dim);}
+.empfehlung-title{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--accent);margin-bottom:8px;}
+.empfehlung-text{font-size:14px;line-height:1.7;}
+
+/* Tabelle */
+.tbl-wrap{overflow-x:auto;margin-top:20px;}
+table{width:100%;border-collapse:collapse;font-family:'IBM Plex Mono',monospace;font-size:12px;}
+th{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--text-muted);padding:8px 12px;border-bottom:1px solid var(--border);text-align:right;}
+th:first-child{text-align:left;}
+td{padding:8px 12px;border-bottom:1px solid var(--border);color:var(--text);text-align:right;}
+td:first-child{text-align:left;}
+tr.active-row td{color:var(--accent);font-weight:500;}
+tr.be-row td{background:var(--accent-dim);}
+
+/* Chart-Container */
+.chart-wrap{margin-top:20px;position:relative;height:240px;}
+canvas{width:100%!important;}
+
+/* Toggle-Gruppe */
+.toggle-group{display:flex;gap:0;margin-bottom:16px;}
+.tgl-btn{flex:1;padding:8px;background:var(--surface2);border:1px solid var(--border);color:var(--text-muted);font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:1px;cursor:pointer;transition:all .2s;}
+.tgl-btn.active{background:var(--accent-dim);border-color:var(--accent);color:var(--accent);}
+
+@media(max-width:600px){
+  .grid2,.res-grid{grid-template-columns:1fr;}
+  .card{padding:20px 18px;}
+}
+</style>
+</head>
+<body>
+
+<div class="theme-toggle">
+  <button class="theme-btn" id="btn-dark" onclick="setTheme('dark')" title="Dunkel">
+    <svg viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+  </button>
+  <button class="theme-btn" id="btn-system" onclick="setTheme('system')" title="System">
+    <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+  </button>
+  <button class="theme-btn" id="btn-light" onclick="setTheme('light')" title="Hell">
+    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+  </button>
+</div>
+
+<div class="container">
+
+  <header style="text-align:center;margin-bottom:40px;">
+    <h1><span>Aktivrente</span> vs. Minijob</h1>
+    <p class="subtitle">Nettovergleich · Sozialversicherung & Steuer · Stand 2025</p>
+  </header>
+
+  <!-- Eingaben -->
+  <div class="card">
+    <div class="card-title">Persönliche Angaben</div>
+    <div class="grid2">
+      <label>
+        <span class="lbl">Monatliche Rente (Brutto)</span>
+        <input type="number" id="rente" value="1400" min="0" step="50">
+        <span class="hint">Brutto-Rente vor KV/PV-Abzug</span>
+      </label>
+      <label>
+        <span class="lbl">Steuerpflichtiger Rentenanteil</span>
+        <input type="number" id="renteStpfl" value="85" min="0" max="100" step="1">
+        <span class="hint">% der Rente, die steuerpflichtig ist (abhängig vom Rentenbeginn-Jahr)</span>
+      </label>
+      <label>
+        <span class="lbl">Bundesland</span>
+        <select id="bundesland" onchange="setKV()">
+          <option value="0">Baden-Württemberg</option>
+          <option value="0">Bayern</option>
+          <option value="0">Berlin</option>
+          <option value="0">Brandenburg</option>
+          <option value="0.6">Sachsen</option>
+          <option value="0">alle anderen Länder</option>
+        </select>
+        <span class="hint">Relevant für PV-Zusatzbeitrag (Sachsen: AN trägt mehr)</span>
+      </label>
+      <label>
+        <span class="lbl">KV-Zusatzbeitrag (gesamt)</span>
+        <input type="number" id="kvZusatz" value="2.5" min="0" max="5" step="0.1">
+        <span class="hint">Kassenindividuell, ø 2025 ≈ 2,5 % · hälftig AN/AG bei SVP-Job</span>
+      </label>
+      <label>
+        <span class="lbl">Kirchensteuerpflichtig?</span>
+        <div class="toggle-group" style="margin-bottom:0;">
+          <button class="tgl-btn" id="kist-nein" onclick="setKiSt(false)">Nein</button>
+          <button class="tgl-btn active" id="kist-ja" onclick="setKiSt(true)">Ja</button>
+        </div>
+      </label>
+      <label>
+        <span class="lbl">Kirchensteuersatz</span>
+        <select id="kistSatz">
+          <option value="9">9 % (Bayern, BaWü)</option>
+          <option value="8">8 % (alle anderen)</option>
+        </select>
+      </label>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Nebenverdienst</div>
+    <div class="grid2">
+      <label>
+        <span class="lbl">Bruttolohn / Monat</span>
+        <input type="number" id="brutto" value="800" min="0" max="6000" step="50">
+        <span class="hint">Ihr Verdienst aus dem Nebenjob</span>
+      </label>
+      <label>
+        <span class="lbl">Steuerklasse (SVP-Job)</span>
+        <select id="stk">
+          <option value="1">Klasse I</option>
+          <option value="3">Klasse III</option>
+          <option value="4">Klasse IV</option>
+          <option value="6">Klasse VI</option>
+        </select>
+        <span class="hint">I: typisch bei Einzelveranlagung / Witwer; VI: Zweitjob</span>
+      </label>
+    </div>
+  </div>
+
+  <button class="btn" onclick="calc()">Vergleich berechnen</button>
+
+  <!-- Ergebnis -->
+  <div id="result">
+
+    <div class="card" style="margin-top:28px;">
+      <div class="card-title">Monatliches Netto im Vergleich</div>
+      <div class="res-grid">
+
+        <div>
+          <div class="res-label">Rente (Netto)</div>
+          <div class="res-val" id="r-rente-netto">—</div>
+          <div class="res-sub">nach KV, PV, ESt &amp; KiSt</div>
+        </div>
+
+        <div style="height:1px;background:var(--border);grid-column:1/-1;margin:4px 0;"></div>
+
+        <div class="res-box" id="box-minijob">
+          <div class="res-label">Option A — Minijob</div>
+          <div class="res-val accent" id="r-mj-netto">—</div>
+          <div class="res-sub" id="r-mj-sub">Netto aus Minijob (steuerfrei)</div>
+        </div>
+
+        <div class="res-box" id="box-svp">
+          <div class="res-label">Option B — Aktivrente (SVP)</div>
+          <div class="res-val" id="r-svp-netto">—</div>
+          <div class="res-sub" id="r-svp-sub">nach KV, PV, ESt</div>
+        </div>
+
+        <div class="res-box" id="box-mj-gesamt">
+          <div class="res-label">Gesamt Minijob</div>
+          <div class="res-val" id="r-mj-gesamt">—</div>
+          <div class="res-sub">Rente-Netto + Minijob</div>
+        </div>
+
+        <div class="res-box" id="box-svp-gesamt">
+          <div class="res-label">Gesamt Aktivrente</div>
+          <div class="res-val" id="r-svp-gesamt">—</div>
+          <div class="res-sub">Rente-Netto + SVP-Job-Netto</div>
+        </div>
+
+      </div>
+
+      <div class="empfehlung" id="empfehlung">
+        <div class="empfehlung-title">Auswertung</div>
+        <div class="empfehlung-text" id="empf-text"></div>
+      </div>
+    </div>
+
+    <!-- Aufschlüsselung -->
+    <div class="card">
+      <div class="card-title">Abzüge im Detail</div>
+      <div class="grid2">
+        <div>
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--text-muted);margin-bottom:12px;">Option A — Minijob</div>
+          <table style="width:100%;">
+            <tbody id="detail-mj"></tbody>
+          </table>
+        </div>
+        <div>
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--text-muted);margin-bottom:12px;">Option B — SVP-Job</div>
+          <table style="width:100%;">
+            <tbody id="detail-svp"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Break-Even-Tabelle -->
+    <div class="card">
+      <div class="card-title">Break-Even-Analyse — ab wann lohnt der SVP-Job?</div>
+      <p style="font-size:12px;color:var(--text-muted);margin-bottom:16px;">Vergleich über verschiedene Bruttolohn-Stufen (bei konstanten übrigen Angaben)</p>
+      <div class="tbl-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th style="text-align:left;">Bruttolohn</th>
+              <th>Minijob netto</th>
+              <th>SVP netto</th>
+              <th>Differenz</th>
+              <th>Besser</th>
+            </tr>
+          </thead>
+          <tbody id="be-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+
+  <p class="disclaimer">Alle Berechnungen sind Näherungswerte auf Basis der jeweils angegebenen Rechtsgrundlagen. Individuelle Faktoren bleiben unberücksichtigt. Kein Ersatz für individuelle Steuer- oder Rechtsberatung · Alle Angaben ohne Gewähr</p>
+
+</div>
+
+<footer>© Robin Glowania</footer>
+
+<script>
+/* ── Theme ─────────────────────────────────────────────────────── */
+function setTheme(t){
+  if(t==='system') document.documentElement.removeAttribute('data-theme');
+  else document.documentElement.setAttribute('data-theme',t);
+  try{localStorage.setItem('g-theme',t);}catch(e){}
+  document.querySelectorAll('.theme-btn').forEach(b=>b.classList.remove('active'));
+  var btn=document.getElementById('btn-'+t);
+  if(btn) btn.classList.add('active');
+}
+(function(){
+  var saved='system';
+  try{saved=localStorage.getItem('g-theme')||'system';}catch(e){}
+  setTheme(saved);
+})();
+
+/* ── Hilfsfunktionen ────────────────────────────────────────────── */
+let kiStPflichtig = true;
+
+function setKiSt(val){
+  kiStPflichtig = val;
+  document.getElementById('kist-ja').classList.toggle('active', val);
+  document.getElementById('kist-nein').classList.toggle('active', !val);
+}
+
+function setKV(){
+  // Sachsen: AN trägt 1,7% Zusatz-PV, ansonsten normal
+}
+
+function fmt(n){ return n.toLocaleString('de-DE',{minimumFractionDigits:2,maximumFractionDigits:2})+' €'; }
+function fmtS(n){ return (n>=0?'+':'')+n.toLocaleString('de-DE',{minimumFractionDigits:2,maximumFractionDigits:2})+' €'; }
+
+/* ── Steuerberechnung (vereinfacht, Grundtarif 2025) ─────────────
+   §32a EStG 2025 Splittingtabelle / Grundtabelle
+   Einkommensgrenzen für Grundtabelle 2025 (Jahreswerte):
+   0–12096: 0%
+   12097–17005: 14–24%
+   17006–66760: 24–42%
+   66761–277825: 42%
+   >277826: 45%
+   ─────────────────────────────────────────────────────────────── */
+function estGrundjahr(zvE){
+  // zvE = zu versteuerndes Einkommen, Jahresbetrag
+  if(zvE<=0) return 0;
+  if(zvE<=12096) return 0;
+  if(zvE<=17005){
+    const y=(zvE-12096)/10000;
+    return Math.round((981.34*y+1400)*y);
+  }
+  if(zvE<=66760){
+    const z=(zvE-17005)/10000;
+    return Math.round((206.43*z+2397)*z+952);
+  }
+  if(zvE<=277825){
+    return Math.round(0.42*zvE-10602);
+  }
+  return Math.round(0.45*zvE-18936);
+}
+
+/* Lohnsteuer-Näherung nach Steuerklasse (Monat → Jahresberechnung) */
+function lohnsteuerMonat(brutto, stk){
+  // Steuerfreibeträge 2025 (Jahreswerte)
+  const freiJahr = {
+    1: 12096, // Grundfreibetrag
+    3: 24192, // Verdopplung
+    4: 12096,
+    6: 0
+  };
+  const wkPauschale = 1230; // Arbeitnehmer-Pauschbetrag p.a.
+  const soPauschale = 36;   // Sonderausgaben-Pauschbetrag p.a.
+  const frei = (freiJahr[stk]||0) + (stk!==6 ? wkPauschale+soPauschale : 0);
+  const bruttoJahr = brutto * 12;
+  const zvE = Math.max(0, bruttoJahr - frei);
+  const estJahr = stk===3 ? estSplitting(zvE) : estGrundjahr(zvE);
+  return estJahr / 12;
+}
+
+function estSplitting(zvE){
+  // Splittingverfahren: halbes zvE, Steuer verdoppeln
+  return estGrundjahr(zvE/2)*2;
+}
+
+/* ── Renten-Steuer (vereinfacht) ──────────────────────────────── */
+function renteSteuer(renteMonat, renteStpflProzent, extraEinkMonat, stk){
+  // Gesamteinkommen = stpfl. Rentenanteil + Arbeitslohn (nach WK-Pauschale, falls SVP)
+  const renteJahr = renteMonat * 12;
+  const renteStpfl = renteJahr * (renteStpflProzent/100);
+  // Werbungskosten-Pauschale Rente: 102 €/Jahr
+  const wkRente = Math.min(102, renteStpfl);
+  const renteZvE = Math.max(0, renteStpfl - wkRente);
+
+  // Arbeitslohn-zvE (bereits in lohnsteuerMonat berücksichtigt via Freibeträge)
+  // Für Kombinationsberechnung: Gesamtbetrachtung
+  // Näherung: separate Besteuerung (konservativ, da keine Progressionsvorteile)
+  return renteZvE;
+}
+
+/* ── Hauptberechnung ─────────────────────────────────────────────── */
+function calcRenteNetto(renteB, renteStpfl, kvZusatz, bundeslandVal, kiStSatz, extraEinkMonat, stk){
+  // KV-Beitrag Rentner: allgemeiner Beitrag 14,6% + Zusatzbeitrag, halbe Tragung
+  // Rentner tragen KV voll (AG-Zuschuss = Rentenkasse), de facto 7,3% + 50% Zusatz
+  const kvSatz = 7.3 + kvZusatz/2;   // AN-Anteil KV
+  const kv = renteB * kvSatz/100;
+
+  // PV-Beitrag Rentner: allgemeiner Satz 3,4% (2025)
+  // Sachsen: AN 2,3% statt 1,7%
+  const pvSatzAN = bundeslandVal === '0.6' ? 2.3 : 1.7; // Sachsen-Sonderregelung
+  const pv = renteB * pvSatzAN/100;
+
+  // KiSt auf Rente
+  // Besteuerungsanteil Rente
+  const renteZvEJahr = renteSteuer(renteB, renteStpfl, 0, stk);
+  // Gesamt-zvE mit evtl. Arbeitslohn-Anteil für Renten-ESt
+  const estRenteJahr = estGrundjahr(renteZvEJahr);
+  const kiStRente = kiStPflichtig ? estRenteJahr * kiStSatz/100 : 0;
+  const estRenteMonat = (estRenteJahr + kiStRente) / 12;
+
+  const netto = renteB - kv - pv - estRenteMonat;
+  return { netto, kv, pv, estMonat: estRenteMonat, zvEJahr: renteZvEJahr };
+}
+
+function calcMinijob(brutto){
+  // Minijob bis 556 €/Monat: steuerfrei, SV-frei (AN-Seite, opt-out RV möglich)
+  const grenze = 556;
+  if(brutto > grenze){
+    return { ok: false, grenze };
+  }
+  return { ok: true, netto: brutto, abzuege: 0 };
+}
+
+function calcSVP(brutto, stk, kvZusatz, bundeslandVal, kiStSatz){
+  // KV: 7,3% + 50% Zusatzbeitrag (AN-Anteil)
+  const kvSatz = 7.3 + kvZusatz/2;
+  const kv = brutto * kvSatz/100;
+
+  // PV: 1,7% AN (Sachsen: 2,3%)
+  const pvSatz = bundeslandVal === '0.6' ? 2.3 : 1.7;
+  const pv = brutto * pvSatz/100;
+
+  // RV: Rentner nach Regelaltersgrenze: kein AN-RV-Beitrag
+  // (Option: AN kann auf Befreiung verzichten → ignorieren, Standard = keine RV)
+  const rv = 0;
+
+  // ALV: keine Versicherungspflicht in der ALV für Rentner nach Regelaltersgrenze
+  const alv = 0;
+
+  // Lohnsteuer auf Bruttolohn
+  const estMonat = lohnsteuerMonat(brutto, stk);
+  const kiSt = kiStPflichtig ? estMonat * kiStSatz/100 : 0;
+
+  const netto = brutto - kv - pv - rv - alv - estMonat - kiSt;
+  return { netto, kv, pv, rv, alv, estMonat, kiSt };
+}
+
+function detailRow(label, val, inv){
+  const s = inv ? '' : '-';
+  const c = val===0 ? 'color:var(--text-muted)' : '';
+  return `<tr><td style="font-size:11px;color:var(--text-muted);padding:5px 0;">${label}</td><td style="text-align:right;font-family:'IBM Plex Mono',monospace;font-size:11px;${c};padding:5px 0;">${val===0?'—':s+fmt(val)}</td></tr>`;
+}
+
+function calc(){
+  const renteB = parseFloat(document.getElementById('rente').value)||0;
+  const renteStpfl = parseFloat(document.getElementById('renteStpfl').value)||85;
+  const kvZusatz = parseFloat(document.getElementById('kvZusatz').value)||2.5;
+  const bundeslandVal = document.getElementById('bundesland').value;
+  const kiStSatz = parseFloat(document.getElementById('kistSatz').value)||9;
+  const brutto = parseFloat(document.getElementById('brutto').value)||0;
+  const stk = parseInt(document.getElementById('stk').value)||1;
+
+  // Rente Netto (ohne Nebenverdienst)
+  const renteRes = calcRenteNetto(renteB, renteStpfl, kvZusatz, bundeslandVal, kiStSatz, 0, stk);
+
+  // Minijob
+  const mjRes = calcMinijob(brutto);
+
+  // SVP
+  const svpRes = calcSVP(brutto, stk, kvZusatz, bundeslandVal, kiStSatz);
+
+  // Gesamtnetto
+  const mjGesamt = renteRes.netto + (mjRes.ok ? brutto : 0);
+  const svpGesamt = renteRes.netto + svpRes.netto;
+
+  // Anzeige
+  document.getElementById('r-rente-netto').textContent = fmt(renteRes.netto);
+
+  if(!mjRes.ok){
+    document.getElementById('r-mj-netto').textContent = '> Grenze';
+    document.getElementById('r-mj-sub').textContent = `Bruttolohn > ${fmt(mjRes.grenze)} – kein Minijob möglich`;
+    document.getElementById('r-mj-gesamt').textContent = '—';
+    document.getElementById('box-minijob').classList.remove('highlight');
+    document.getElementById('box-mj-gesamt').classList.remove('highlight');
+  } else {
+    document.getElementById('r-mj-netto').textContent = fmt(brutto);
+    document.getElementById('r-mj-sub').textContent = 'Steuerfrei, keine SV-Abgaben (AN)';
+    document.getElementById('r-mj-gesamt').textContent = fmt(mjGesamt);
+  }
+
+  document.getElementById('r-svp-netto').textContent = fmt(svpRes.netto);
+  document.getElementById('r-svp-sub').textContent = `KV+PV+LSt: ${fmt(brutto-svpRes.netto)} Abzug`;
+  document.getElementById('r-svp-gesamt').textContent = fmt(svpGesamt);
+
+  // Highlighting
+  const mjBesser = mjRes.ok && mjGesamt > svpGesamt;
+  document.getElementById('box-mj-gesamt').classList.toggle('highlight', mjBesser);
+  document.getElementById('box-svp-gesamt').classList.toggle('highlight', !mjBesser);
+  document.getElementById('box-minijob').classList.toggle('highlight', mjRes.ok && brutto <= mjRes.grenze);
+  document.getElementById('box-svp').classList.toggle('highlight', !mjRes.ok || svpRes.netto > brutto);
+
+  // Empfehlung
+  let empfText = '';
+  if(!mjRes.ok){
+    empfText = `Ihr Bruttolohn von ${fmt(brutto)} übersteigt die Minijob-Grenze (556 €/Monat). Ein sozialversicherungspflichtiges Beschäftigungsverhältnis (Aktivrente) ist die einzige Option. Netto verbleiben Ihnen ${fmt(svpRes.netto)} aus dem Job.`;
+  } else {
+    const diff = mjGesamt - svpGesamt;
+    if(diff > 0){
+      empfText = `Beim eingegebenen Bruttolohn ist der <strong>Minijob günstiger</strong> – um ${fmt(diff)}/Monat. Der Minijob bringt das Bruttolohn vollständig als Netto, während beim SVP-Job KV, PV und Lohnsteuer anfallen.`;
+    } else if(diff < 0){
+      empfText = `Beim eingegebenen Bruttolohn ist die <strong>Aktivrente (SVP-Job) günstiger</strong> – um ${fmt(Math.abs(diff))}/Monat. Trotz der Sozialversicherungsabzüge fällt das Gesamtnetto höher aus.`;
+    } else {
+      empfText = `Minijob und Aktivrente ergeben bei diesem Bruttolohn nahezu identisches Gesamtnetto.`;
+    }
+  }
+  document.getElementById('empf-text').innerHTML = empfText;
+
+  // Detail-Tabellen
+  // Minijob
+  let dMJ = '';
+  dMJ += detailRow('Bruttolohn', brutto, true);
+  dMJ += detailRow('Lohnsteuer', 0);
+  dMJ += detailRow('KV (AN)', 0);
+  dMJ += detailRow('PV (AN)', 0);
+  dMJ += `<tr style="border-top:1px solid var(--border);"><td style="padding:8px 0;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--accent);">Netto Minijob</td><td style="text-align:right;font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--accent);padding:8px 0;">${mjRes.ok ? fmt(brutto) : '—'}</td></tr>`;
+  document.getElementById('detail-mj').innerHTML = dMJ;
+
+  // SVP
+  let dSVP = '';
+  dSVP += detailRow('Bruttolohn', brutto, true);
+  dSVP += detailRow('KV (AN)', svpRes.kv);
+  dSVP += detailRow('PV (AN)', svpRes.pv);
+  dSVP += detailRow('RV (AN)', 0); // Rentner: befreit
+  dSVP += detailRow('ALV (AN)', 0); // Rentner: keine ALV
+  dSVP += detailRow('Lohnsteuer', svpRes.estMonat);
+  if(kiStPflichtig) dSVP += detailRow('Kirchensteuer', svpRes.kiSt);
+  dSVP += `<tr style="border-top:1px solid var(--border);"><td style="padding:8px 0;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--accent);">Netto SVP-Job</td><td style="text-align:right;font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--accent);padding:8px 0;">${fmt(svpRes.netto)}</td></tr>`;
+  document.getElementById('detail-svp').innerHTML = dSVP;
+
+  // Break-Even-Tabelle
+  const stufen = [200, 300, 400, 450, 500, 556, 600, 700, 800, 1000, 1200, 1500, 2000];
+  let rows = '';
+  let beFound = false;
+  for(let i=0; i<stufen.length; i++){
+    const b = stufen[i];
+    const mj = b <= 556 ? b : null;
+    const svp = calcSVP(b, stk, kvZusatz, bundeslandVal, kiStSatz);
+    const mjNet = mj !== null ? mj : null;
+    const svpNet = svp.netto;
+    const isCurrent = Math.abs(b - brutto) < 25;
+    const diff = mjNet !== null ? mjNet - svpNet : null;
+    const besser = mjNet !== null ? (diff > 2 ? 'Minijob' : diff < -2 ? 'SVP' : 'gleich') : 'SVP';
+    const beRow = !beFound && diff !== null && diff < 0 && i > 0;
+    if(beRow) beFound = true;
+    rows += `<tr class="${isCurrent?'active-row':''} ${beRow?'be-row':''}">
+      <td style="text-align:left;">${b.toLocaleString('de-DE')} €</td>
+      <td>${mjNet!==null?fmt(mjNet):'–'}</td>
+      <td>${fmt(svpNet)}</td>
+      <td>${diff!==null?fmtS(diff):'–'}</td>
+      <td style="color:${besser==='Minijob'?'var(--accent-lt)':besser==='SVP'?'var(--accent)':'var(--text-muted)'};">${besser}</td>
+    </tr>`;
+  }
+  document.getElementById('be-tbody').innerHTML = rows;
+
+  document.getElementById('result').style.display = 'block';
+}
+</script>
+</body>
+</html>
