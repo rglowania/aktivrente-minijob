@@ -135,7 +135,7 @@ table.be tr.kipp td{background:var(--accent-dim);}
 
   <header style="text-align:center;margin-bottom:40px;">
     <h1><span>Aktivrente</span> vs. Minijob</h1>
-    <p class="subtitle">§ 3 Nr. 21 EStG · Nettovergleich</p>
+    <p class="subtitle">Nettovergleich · 2026</p>
   </header>
 
   <div class="card">
@@ -153,12 +153,12 @@ table.be tr.kipp td{background:var(--accent-dim);}
       <label id="wrap-brutto">
         <span class="lbl">Bruttolohn / Monat</span>
         <input type="number" id="brutto" value="800" min="1" max="10000" step="50">
-        <span class="hint">Minijob-Grenze 2026: 603 € · Aktivrenten-Freibetrag: 2.000 €</span>
+        <span class="hint">Grenzen 2026: Minijob 603 € · Freibetrag 2.000 €</span>
       </label>
       <label id="wrap-netto" style="display:none;">
         <span class="lbl">Gewünschtes Netto / Monat</span>
         <input type="number" id="netto-ziel" value="600" min="1" max="9000" step="10">
-        <span class="hint">Beide Varianten werden auf diesen Netto-Zielwert zurückgerechnet</span>
+        <span class="hint">Rückrechnung für beide Varianten</span>
       </label>
       <label>
         <span class="lbl">Steuerklasse</span>
@@ -168,12 +168,12 @@ table.be tr.kipp td{background:var(--accent-dim);}
           <option value="4">IV — verheiratet, ähnliches Einkommen</option>
           <option value="6">VI — Zweitjob</option>
         </select>
-        <span class="hint">Nur relevant bei Aktivrente mit Lohn &gt; 2.000 €</span>
+        <span class="hint">Relevant bei Aktivrente &gt; 2.000 €</span>
       </label>
       <label>
         <span class="lbl">KV-Zusatzbeitrag (gesamt)</span>
         <input type="number" id="kvZusatz" value="2.9" min="0" max="6" step="0.1">
-        <span class="hint">Kassenindividuell · ø 2026: 2,9 % · AN trägt die Hälfte</span>
+        <span class="hint">Ø 2026: 2,9 % · AN-Anteil: Hälfte</span>
       </label>
       <label>
         <span class="lbl">Bundesland</span>
@@ -241,7 +241,7 @@ table.be tr.kipp td{background:var(--accent-dim);}
 
     <div class="card">
       <div class="card-title">Break-Even — Netto über alle Lohnstufen</div>
-      <p style="font-size:12px;color:var(--text-muted);margin-bottom:16px;">Farbig markiert: eingegebener Bruttolohn · Grün hinterlegt: Kipppunkt</p>
+      <p style="font-size:12px;color:var(--text-muted);margin-bottom:16px;">Markiert: Eingabe · Grün: Kipppunkt</p>
       <div class="tbl-wrap">
         <table class="be">
           <thead>
@@ -260,7 +260,7 @@ table.be tr.kipp td{background:var(--accent-dim);}
 
   </div>
 
-  <p class="disclaimer">Alle Berechnungen sind Näherungswerte auf Basis der jeweils angegebenen Rechtsgrundlagen. Individuelle Faktoren bleiben unberücksichtigt. Kein Ersatz für individuelle Steuer- oder Rechtsberatung · Alle Angaben ohne Gewähr</p>
+  <p class="disclaimer">Näherungswerte, ohne Gewähr. Keine Steuer- oder Rechtsberatung.</p>
 </div>
 
 <footer>© Robin Glowania</footer>
@@ -451,23 +451,23 @@ function calc(){
     const boxAR_el = document.getElementById('box-ar');
     if(!mj_rv.ok){
       document.getElementById('val-mj').textContent = 'n/a';
-      document.getElementById('sub-mj').textContent = 'Zielwert übersteigt Minijob-Grenze (603 €)';
+      document.getElementById('sub-mj').textContent = 'Nicht möglich über 603 €';
       boxMJ_el.classList.remove('winner');
     } else {
       document.getElementById('val-mj').textContent = fmt(bruttoMJ);
-      document.getElementById('sub-mj').textContent = 'Brutto ' + fmt(bruttoMJ) + ' · Keine Steuer · keine SV (AN)';
+      document.getElementById('sub-mj').textContent = 'Brutto = Netto · keine Abzüge';
       boxMJ_el.classList.add('winner');
     }
     document.getElementById('val-ar').textContent = fmt(ar_rv.netto);
-    document.getElementById('sub-ar').textContent = 'Brutto ' + fmt(bruttoAR) + ' · KV+PV: ' + fmt(ar_rv.kv + ar_rv.pv);
+    document.getElementById('sub-ar').textContent = 'Brutto ' + fmt(bruttoAR) + ' · KV+PV ' + fmt(ar_rv.kv + ar_rv.pv);
     boxAR_el.classList.toggle('winner', !mjMoeglich);
 
     // Auswertung
     let txt_rv = '';
     if(!mjMoeglich){
-      txt_rv = `Für ein Netto von <strong>${fmt(ziel)}</strong> ist der Minijob nicht möglich (Grenze: 603 €). Bei der <strong>Aktivrente</strong> wird ein Brutto von <strong>${fmt(bruttoAR)}</strong> benötigt.`;
+      txt_rv = `Netto-Ziel <strong>${fmt(ziel)}</strong>: Minijob nicht möglich (max. 603 €). Aktivrente braucht <strong>${fmt(bruttoAR)}</strong> Brutto.`;
     } else {
-      txt_rv = `Für ein Netto von <strong>${fmt(ziel)}</strong>: beim Minijob genügt ein Brutto von <strong>${fmt(bruttoMJ)}</strong> (Netto = Brutto). Bei der Aktivrente wird <strong>${fmt(bruttoAR)}</strong> Brutto benötigt — die Differenz von <strong>${fmt(bruttoAR - bruttoMJ)}</strong> entsteht durch KV- und PV-Abzüge.`;
+      txt_rv = `Netto-Ziel <strong>${fmt(ziel)}</strong>: Minijob <strong>${fmt(bruttoMJ)}</strong>, Aktivrente <strong>${fmt(bruttoAR)}</strong>. Differenz: <strong>${fmt(bruttoAR - bruttoMJ)}</strong> (KV/PV).`;
     }
     document.getElementById('verdict-text').innerHTML = txt_rv;
 
@@ -513,35 +513,35 @@ function calc(){
 
   if(!mj.ok){
     document.getElementById('val-mj').textContent = 'n/a';
-    document.getElementById('sub-mj').textContent = 'Bruttolohn > 603 € — Minijob nicht möglich';
+    document.getElementById('sub-mj').textContent = 'Über 603 € nicht möglich';
     boxMJ.classList.remove('winner');
     boxAR.classList.add('winner');
   } else {
     const mjWinner = b >= ar.netto;
     document.getElementById('val-mj').textContent = fmt(b);
-    document.getElementById('sub-mj').textContent = 'Keine Lohnsteuer · keine SV-Abgaben (AN)';
+    document.getElementById('sub-mj').textContent = 'Keine Abzüge (AN)';
     boxMJ.classList.toggle('winner', mjWinner);
     boxAR.classList.toggle('winner', !mjWinner);
   }
 
   document.getElementById('val-ar').textContent = fmt(ar.netto);
   const arSub = ar.stpfl > 0
-    ? `${fmt(ar.steuerfrei)} steuerfrei · ${fmt(ar.stpfl)} lohnstpfl. · KV+PV: ${fmt(ar.kv + ar.pv)}`
-    : `Lohn vollständig steuerfrei (≤ 2.000 €) · KV+PV: ${fmt(ar.kv + ar.pv)}`;
+    ? `${fmt(ar.steuerfrei)} steuerfrei · ${fmt(ar.stpfl)} stpfl. · KV+PV ${fmt(ar.kv + ar.pv)}`
+    : `Steuerfrei (≤ 2.000 €) · KV+PV ${fmt(ar.kv + ar.pv)}`;
   document.getElementById('sub-ar').textContent = arSub;
 
   /* Auswertung */
   let txt = '';
   if(!mj.ok){
-    txt = `Bei ${fmt(b)} Bruttolohn ist der Minijob nicht möglich (Grenze 2026: 603 €). Die <strong>Aktivrente nach § 3 Nr. 21 EStG</strong> ist die einzige Option. Der Freibetrag von 2.000 €/Monat macht den Lohn vollständig steuerfrei — KV und PV bleiben fällig. Netto: <strong>${fmt(ar.netto)}</strong>.`;
+    txt = `Bei <strong>${fmt(b)}</strong> ist nur Aktivrente möglich (Minijob max. 603 €). Netto: <strong>${fmt(ar.netto)}</strong>.`;
   } else {
     const diff = b - ar.netto;
     if(diff > 0.5){
-      txt = `Beim Bruttolohn von ${fmt(b)} bringt der <strong>Minijob ${fmt(diff)}/Monat mehr Netto</strong>. Im Minijob fließt der Bruttolohn vollständig zu; bei der Aktivrente fallen KV (${fmt(ar.kv)}) und PV (${fmt(ar.pv)}) an — auch wenn der § 3 Nr. 21-Freibetrag die Lohnsteuer auf null reduziert.`;
+      txt = `Bei <strong>${fmt(b)}</strong> bringt der Minijob <strong>${fmt(diff)}/Monat</strong> mehr Netto.`;
     } else if(diff < -0.5){
-      txt = `Beim Bruttolohn von ${fmt(b)} bringt die <strong>Aktivrente ${fmt(Math.abs(diff))}/Monat mehr Netto</strong>.`;
+      txt = `Bei <strong>${fmt(b)}</strong> bringt die Aktivrente <strong>${fmt(Math.abs(diff))}/Monat</strong> mehr Netto.`;
     } else {
-      txt = `Minijob und Aktivrente ergeben bei ${fmt(b)} nahezu identisches Netto.`;
+      txt = `Bei <strong>${fmt(b)}</strong> ist das Netto nahezu gleich.`;
     }
   }
   document.getElementById('verdict-text').innerHTML = txt;
