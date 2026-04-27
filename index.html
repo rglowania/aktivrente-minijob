@@ -57,6 +57,11 @@ h1 span{color:var(--accent);}
 .hint{font-size:10px;color:var(--text-muted);margin-top:5px;font-family:'IBM Plex Mono',monospace;line-height:1.5;}
 .disclaimer{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--text-muted);line-height:1.7;opacity:.7;margin-top:32px;}
 footer{text-align:center;padding:32px 0 0;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:1px;color:var(--text-muted);opacity:.6;}
+.view-toggle{display:flex;justify-content:center;margin:0 0 18px;}
+.view-btn{padding:8px 12px;background:var(--surface2);border:1px solid var(--border);color:var(--text-muted);font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:1px;cursor:pointer;}
+.view-btn strong{color:var(--accent);}
+body.compact .hint{display:none;}
+body.compact .disclaimer{display:none;}
 /* ═══════════════════════════════════════════════════════════════
    ENDE G-DESIGN
    ═══════════════════════════════════════════════════════════════ */
@@ -137,6 +142,9 @@ table.be tr.kipp td{background:var(--accent-dim);}
     <h1><span>Aktivrente</span> vs. Minijob</h1>
     <p class="subtitle">Nettovergleich · 2026</p>
   </header>
+  <div class="view-toggle">
+    <button class="view-btn" id="view-btn" onclick="toggleCompact()">Ansicht: <strong>Kompakt</strong></button>
+  </div>
 
   <div class="card">
     <div class="card-title">Angaben zur Beschäftigung</div>
@@ -278,6 +286,21 @@ function setTheme(t){
 (function(){
   let s='system';try{s=localStorage.getItem('g-theme')||'system';}catch(e){}
   setTheme(s);
+})();
+
+/* ── Kompaktansicht ──────────────────────────────────────────── */
+function setCompact(compact){
+  document.body.classList.toggle('compact', compact);
+  const btn = document.getElementById('view-btn');
+  if(btn) btn.innerHTML = compact ? 'Ansicht: <strong>Kompakt</strong>' : 'Ansicht: <strong>Details</strong>';
+  try{ localStorage.setItem('g-compact', compact ? '1' : '0'); }catch(e){}
+}
+function toggleCompact(){
+  setCompact(!document.body.classList.contains('compact'));
+}
+(function(){
+  let c='1';try{c=localStorage.getItem('g-compact')||'1';}catch(e){}
+  setCompact(c==='1');
 })();
 
 /* ── KiSt-Toggle ────────────────────────────────────────────── */
