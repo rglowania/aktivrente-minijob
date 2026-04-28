@@ -147,77 +147,48 @@ canvas#chart{width:100%;display:block;}
     <p class="subtitle">§ 3 Nr. 21 EStG · Was lohnt sich wann?</p>
   </header>
 
-  <!-- Was ist was -->
+  <!-- Überblick + Lücke -->
   <div class="card">
-    <div class="card-title">Die zwei Modelle</div>
+    <div class="card-title">Die zwei Modelle im Überblick</div>
     <div class="fact-grid">
       <div class="fact-box">
         <div class="fact-label">Minijob</div>
         <div class="fact-title">Bis 603 € — alles netto</div>
         <ul class="fact-list">
-          <li>Lohn bis 603 €/Monat steuerfrei</li>
-          <li>Keine SV-Beiträge für den Arbeitnehmer</li>
-          <li>Brutto = Netto, ohne Abzüge</li>
-          <li>AG zahlt Pauschalabgaben (~28 %)</li>
-          <li>Kein Zugang zum § 3 Nr. 21-Freibetrag</li>
+          <li>Brutto = Netto, keine Abzüge (AN)</li>
+          <li>Steuerfrei, keine KV/PV/RV/ALV</li>
+          <li>Harte Grenze: max. 603 €/Monat</li>
         </ul>
       </div>
       <div class="fact-box accent-box">
         <div class="fact-label">Aktivrente · § 3 Nr. 21 EStG</div>
         <div class="fact-title">Bis 2.000 € steuerfrei — ab 2026</div>
         <ul class="fact-list">
-          <li>SVP-Job nach Regelaltersgrenze (67)</li>
-          <li>Lohn bis 2.000 €/Monat steuerfrei</li>
-          <li>KV + PV bleiben fällig (~10 % des Lohns)</li>
-          <li>Kein RV- und kein ALV-Beitrag (AN)</li>
-          <li>Über 2.000 €: normale Lohnsteuer</li>
+          <li>Steuerfreibetrag 2.000 €/Monat</li>
+          <li>KV + PV bleiben fällig (~10 % Abzug)</li>
+          <li>Kein RV-, kein ALV-Beitrag (AN)</li>
         </ul>
       </div>
     </div>
-  </div>
 
-  <!-- Kernaussage -->
-  <div class="card">
-    <div class="card-title">Die Kernaussage</div>
-    <h2>Bis 603 € — Minijob ist immer besser</h2>
+    <h2 style="margin-top:8px;">Was bedeutet das konkret?</h2>
     <p>
-      Beim Minijob landet der Bruttolohn vollständig als Netto — keine Steuer,
-      keine Sozialversicherung. Bei der Aktivrente fallen dagegen <strong>immer
-      KV- und PV-Beiträge</strong> an (zusammen etwa 10 % des Bruttolohns), auch wenn
-      der § 3 Nr. 21-Freibetrag die Lohnsteuer auf null reduziert.
+      <strong>Bis 603 €</strong> gewinnt immer der Minijob — keine Abzüge, Brutto = Netto.
+      Bei der Aktivrente fallen dagegen KV und PV auf den vollen Bruttolohn an,
+      selbst wenn die Lohnsteuer dank § 3 Nr. 21 auf null fällt.
     </p>
-    <p>
-      Konkret: Wer im Minijob 603 € verdient, bekommt <strong>603 € netto</strong>.
-      Wer als Aktivrentner dieselben 603 € verdient, zahlt etwa 63 € an KV und PV
-      und behält nur rund <strong>540 € netto</strong>. Der Minijob ist hier klar besser.
-    </p>
-
-    <h2 style="margin-top:22px;">Achtung: Die Netto-Lücke über 603 €</h2>
-    <p>
-      Ab 604 € Brutto ist zwar kein Minijob mehr möglich — aber das heißt nicht,
-      dass sich die Aktivrente sofort lohnt. Weil bei der Aktivrente KV und PV
-      auf den <strong>gesamten</strong> Bruttolohn anfallen, liegt das Netto einer Aktivrente
-      bei 604 € deutlich <strong>unter</strong> dem Netto eines Minijobs bei 603 €.
-    </p>
-    <p>
-      Erst ab etwa <strong>674 € Brutto</strong> erreicht die Aktivrente dasselbe
-      Netto wie ein Minijob mit 603 € (abhängig vom KV-Zusatzbeitrag). Darunter entsteht eine
-      <strong>Netto-Lücke</strong>: man arbeitet mehr, verdient brutto mehr — hat aber
-      netto weniger als mit einem Minijob bei 603 €.
-    </p>
-
-    <h2 style="margin-top:22px;">Über ~674 € — Aktivrente zieht davon</h2>
-    <p>
-      Oberhalb dieses Break-Even-Punkts steigt das Aktivrenten-Netto kontinuierlich weiter.
-      Bis 2.000 € Brutto bleibt der gesamte Lohn steuerfrei — nur KV und PV werden abgezogen.
-      Ab 2.000 € kommt Lohnsteuer auf den übersteigenden Betrag hinzu, aber das Netto
-      wächst weiter. Die Aktivrente schlägt einen normalen SVP-Job dabei deutlich,
-      weil die Steuerfreiheit bis 2.000 € erhebliche Ersparnisse bringt.
-    </p>
+    <div style="margin:16px 0;padding:16px 20px;background:rgba(220,80,60,0.08);border-left:3px solid rgba(220,80,60,0.6);color:var(--text);">
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(220,80,60,0.8);margin-bottom:8px;">⚠ Achtung — Netto-Lücke</div>
+      <p style="margin-bottom:0;">
+        Ab 604 € ist kein Minijob mehr möglich. Aber erst ab etwa <strong style="color:var(--text);">674 € Brutto</strong>
+        erreicht die Aktivrente dasselbe Netto wie ein Minijob bei 603 €. Dazwischen arbeitet
+        man mehr, verdient brutto mehr — hat aber <strong style="color:var(--text);">netto weniger</strong>.
+        Dieser Bereich sollte vermieden werden.
+      </p>
+    </div>
     <p style="margin-bottom:0;">
-      Kurzfassung: <strong>Bis 603 € → Minijob</strong>.
-      <strong>604–~674 € → Netto-Lücke</strong> (weniger als beim 603 €-Minijob).
-      <strong>Ab ~674 € → Aktivrente lohnt sich</strong> und wird mit steigendem Brutto immer vorteilhafter.
+      <strong>Ab ~674 €</strong> zieht die Aktivrente davon und wird mit steigendem Brutto
+      immer vorteilhafter. Bis 2.000 € bleibt der gesamte Lohn steuerfrei.
     </p>
   </div>
 
@@ -226,21 +197,17 @@ canvas#chart{width:100%;display:block;}
     <div class="card-title">Wann lohnt sich was?</div>
     <div class="when-grid">
       <div class="when-box mj">
-        <div class="when-label">Minijob ist besser, wenn …</div>
+        <div class="when-label">Minijob wählen, wenn …</div>
         <ul>
-          <li>der gewünschte Verdienst unter 603 € liegt</li>
-          <li>maximales Netto bei kleinem Stundeneinsatz wichtig ist</li>
-          <li>der Arbeitgeber die Pauschalabgaben trägt</li>
-          <li>Flexibilität ohne Sozialversicherungspflicht gewünscht ist</li>
+          <li>der gewünschte Verdienst ≤ 603 € liegt</li>
+          <li>maximales Netto bei wenig Stunden wichtig ist</li>
         </ul>
       </div>
       <div class="when-box ar">
-        <div class="when-label">Aktivrente ist besser, wenn …</div>
+        <div class="when-label">Aktivrente wählen, wenn …</div>
         <ul>
-          <li>der Verdienst über 603 € liegen soll</li>
-          <li>ein regelmässiges, höheres Einkommen gewünscht ist</li>
-          <li>die Krankenversicherung sowieso beitragsgebunden ist</li>
-          <li>der frühere Arbeitgeber das Modell anbietet</li>
+          <li>der Verdienst deutlich über 674 € liegen soll</li>
+          <li>ein höheres Gesamteinkommen gewünscht ist</li>
         </ul>
       </div>
     </div>
@@ -250,31 +217,10 @@ canvas#chart{width:100%;display:block;}
   <div class="card">
     <div class="card-title">Netto-Verlauf im Vergleich</div>
     <p style="font-size:13px;color:var(--text-muted);margin-bottom:18px;">
-      Wie viel Netto bleibt bei welchem Bruttolohn? Parameter anpassen um den Effekt verschiedener Krankenkassen oder Steuerklassen zu sehen.
+      Wie viel Netto bleibt bei welchem Bruttolohn? Berechnung mit ø KV-Zusatzbeitrag 2,9 % und Steuerklasse I.
     </p>
 
-    <div class="chart-controls">
-      <div class="ctrl-group">
-        <span class="ctrl-label">KV-Zusatzbeitrag (gesamt)</span>
-        <input type="number" id="kvZ" value="2.9" min="0" max="6" step="0.1" oninput="drawChart()">
-      </div>
-      <div class="ctrl-group">
-        <span class="ctrl-label">Bundesland</span>
-        <select id="sachsen" onchange="drawChart()">
-          <option value="">Alle (außer Sachsen)</option>
-          <option value="sachsen">Sachsen</option>
-        </select>
-      </div>
-      <div class="ctrl-group">
-        <span class="ctrl-label">Steuerklasse (ab 2.000 €)</span>
-        <select id="stk" onchange="drawChart()">
-          <option value="1">I — ledig</option>
-          <option value="3">III — verheiratet</option>
-          <option value="4">IV</option>
-          <option value="6">VI — Zweitjob</option>
-        </select>
-      </div>
-    </div>
+
 
     <div class="chart-wrap">
       <canvas id="chart" height="340"></canvas>
@@ -302,7 +248,7 @@ canvas#chart{width:100%;display:block;}
   <p class="disclaimer">Alle Berechnungen sind Näherungswerte auf Basis der jeweils angegebenen Rechtsgrundlagen. Individuelle Faktoren bleiben unberücksichtigt. Kein Ersatz für individuelle Steuer- oder Rechtsberatung · Alle Angaben ohne Gewähr</p>
 </div>
 
-<footer>© Robin Glowania</footer>
+<footer>© Robin Glowania · Zuletzt aktualisiert: 28.04.2026</footer>
 
 <script>
 /* ── Theme ──────────────────────────────────────────────────── */
@@ -356,9 +302,9 @@ function nettoAR(b, stk, kvZ, sachsen){
 function drawChart(){
   const canvas = document.getElementById('chart');
   const ctx    = canvas.getContext('2d');
-  const kvZ    = parseFloat(document.getElementById('kvZ').value)||2.9;
-  const sachsen= document.getElementById('sachsen').value==='sachsen';
-  const stk    = parseInt(document.getElementById('stk').value)||1;
+  const kvZ    = 2.9;   // ø KV-Zusatzbeitrag 2026
+  const sachsen= false; // Standard (nicht Sachsen)
+  const stk    = 1;     // Steuerklasse I
 
   // Responsive DPI
   const W = canvas.offsetWidth || 700;
@@ -460,6 +406,42 @@ function drawChart(){
   ctx.textAlign='left';
   ctx.fillText('603 €', px(603)+4, PAD.t+12);
 
+  // Horizontale Referenzlinie: Minijob-Maximum-Netto = 603 €
+  ctx.strokeStyle=cAccentLt;
+  ctx.lineWidth=1;
+  ctx.setLineDash([6,3]);
+  ctx.globalAlpha=0.5;
+  ctx.beginPath();
+  ctx.moveTo(PAD.l, py(603));
+  ctx.lineTo(PAD.l+plotW, py(603));
+  ctx.stroke();
+  ctx.setLineDash([]);
+  ctx.globalAlpha=1;
+
+  // Netto-Lücke einfärben (Bereich wo AR-Netto < 603 € Minijob-Netto, ab 604 € Brutto)
+  // Break-Even finden
+  let breakEvenB = 0;
+  for(let bb=604; bb<=1200; bb++){
+    if(nettoAR(bb, stk, kvZ, sachsen) >= 603){ breakEvenB = bb; break; }
+  }
+  if(breakEvenB > 604){
+    ctx.beginPath();
+    ctx.moveTo(px(603), py(603));
+    for(let bb=604; bb<=breakEvenB; bb+=2){
+      ctx.lineTo(px(bb), py(nettoAR(bb, stk, kvZ, sachsen)));
+    }
+    ctx.lineTo(px(breakEvenB), py(603));
+    ctx.closePath();
+    ctx.fillStyle='rgba(220,80,60,0.12)';
+    ctx.fill();
+    // Label
+    const midLuecke = (603 + breakEvenB) / 2;
+    ctx.fillStyle='rgba(220,80,60,0.7)';
+    ctx.font='bold 9px "IBM Plex Mono", monospace';
+    ctx.textAlign='center';
+    ctx.fillText('Netto-Lücke', px(midLuecke), py(603)-6);
+  }
+
   // Aktivrenten-Freibetrag-Linie
   ctx.strokeStyle=cAccent;
   ctx.lineWidth=1;
@@ -516,12 +498,19 @@ function drawChart(){
   ctx.fill();
   ctx.globalAlpha=1;
 
-  // Kipppunkt-Info
-  const kippB = 603;
-  const arAtKipp = nettoAR(kippB, stk, kvZ, sachsen);
-  const abstand = kippB - arAtKipp;
+  // Kipppunkt-Info mit Break-Even
+  let beB = 0;
+  for(let bb=604; bb<=2000; bb++){
+    if(nettoAR(bb, stk, kvZ, sachsen) >= 603){ beB = bb; break; }
+  }
+  const arAt603 = nettoAR(603, stk, kvZ, sachsen);
+  const luecke603 = 603 - arAt603;
   document.getElementById('kipp-info').innerHTML =
-    `<strong>An der Minijob-Grenze (603 €):</strong> Minijob-Netto = <strong>603,00 €</strong> · Aktivrente-Netto = <strong>${arAtKipp.toLocaleString('de-DE',{minimumFractionDigits:2,maximumFractionDigits:2})} €</strong> · Vorteil Minijob: <strong>${abstand.toLocaleString('de-DE',{minimumFractionDigits:2,maximumFractionDigits:2})} €/Monat</strong>`;
+    `<strong>Minijob-Netto bei 603 €:</strong> 603,00 € · ` +
+    `<strong>Aktivrente-Netto bei 603 €:</strong> ${arAt603.toLocaleString('de-DE',{minimumFractionDigits:2,maximumFractionDigits:2})} € ` +
+    `(${luecke603.toLocaleString('de-DE',{minimumFractionDigits:2,maximumFractionDigits:2})} € weniger)<br>` +
+    `<strong>Netto-Lücke:</strong> 604 – ${beB} € Brutto · ` +
+    `<strong>Break-Even:</strong> ab ~<strong>${beB} €</strong> Brutto lohnt sich die Aktivrente`;
 
   // Mouseover-Tooltip
   canvas._points = points;
